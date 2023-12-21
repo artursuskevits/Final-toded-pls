@@ -1,0 +1,46 @@
+CREATE TABLE [dbo].[Kategooriatabel] (
+    [Id]                 INT          IDENTITY (1, 1) NOT NULL,
+    [Kategooria_nimetus] VARCHAR (50) Unique NOT NULL,
+    [Kitjeldus]          TEXT         NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+CREATE TABLE [dbo].[Toodetabel] (
+    [Id]           INT          IDENTITY (1, 1) NOT NULL,
+    [Toodenimetus] VARCHAR (50)  unique NOT NULL,
+    [Kogus]        INT          NOT NULL,
+    [Hind]         FLOAT (53)   NOT NULL,
+    [Pilte]        TEXT         NULL,
+    [Kategooriat]  INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Toodetabel_ToTable] FOREIGN KEY ([Kategooriat]) REFERENCES [dbo].[Kategooriatabel] ([Id])
+);
+
+select * from Toodetabel;          
+
+CREATE TABLE Registration (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    login VARCHAR(45) UNIQUE NOT NULL,
+    status varchar(25) not null
+);
+select * from Registration
+
+Insert into Kategooriatabel(Kategooria_nimetus)
+Values('Piimatooded');
+Insert into Kategooriatabel(Kategooria_nimetus)
+Values('Lihatooded');
+Insert into Kategooriatabel(Kategooria_nimetus)
+Values('Puuviljad');
+
+Insert into Toodetabel(Toodenimetus,Kogus,Hind,Pilte,Kategooriat)
+Values('piim',4,1,'piim.jpg',1);
+Insert into Toodetabel(Toodenimetus,Kogus,Hind,Pilte,Kategooriat)
+Values('vorst',4,1,'vorst.png',2);
+Insert into Toodetabel(Toodenimetus,Kogus,Hind,Pilte,Kategooriat)
+Values('banan',4,1,'piim.png',3);
+Insert into Toodetabel(Toodenimetus,Kogus,Hind,Pilte,Kategooriat)
+Values('sirok',4,1,'siirok.png',3);
+
+Insert into Registration(login,status)
+Values('Vlad','Müüja')
+Insert into Registration(login,status)
+Values('Artem','Omanik')
